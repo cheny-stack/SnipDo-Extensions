@@ -2,10 +2,6 @@
 # "description": "Copy the selected text and paste it in the active window. Then press Alt+L to paste the text."
 
 ```powershell
-param(
-    [string] $PLAIN_TEXT
-)
-
 # 将文本复制到剪贴板
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Clipboard]::SetText($PLAIN_TEXT)
