@@ -2,9 +2,26 @@
 # "description": "Copy the selected text and paste it in the active window. Then press Alt+L to paste the text."
 
 ```powershell
-# 将文本复制到剪贴板
+# 清理文本，移除特殊字符和表情符号
+$cleanText = $PLAIN_TEXT
+
+# 移除表情符号和特殊 Unicode 字符
+$ranges = @(
+    # 移除表情符号和其他特殊符号，但保留中文和基本ASCII
+    '[^\x00-\x7F\u4e00-\u9fa5\p{P}\s]',
+    # 移除特定符号
+    '[#@$%^&*+=\\|<>{}[\]]'
+)
+
+foreach ($range in $ranges) {
+    $cleanText = $cleanText -replace $range, ''
+}
+
+# 将清理后的文本复制到剪贴板
 Add-Type -AssemblyName System.Windows.Forms
-[System.Windows.Forms.Clipboard]::SetText($PLAIN_TEXT)
+[System.Windows.Forms.Clipboard]::SetText($cleanText)
+
+
 
 # 等待一小段时间确保文本已复制
 Start-Sleep -Milliseconds 100
