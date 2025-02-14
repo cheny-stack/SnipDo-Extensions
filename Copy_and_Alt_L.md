@@ -1,4 +1,4 @@
-# "name": "Copy and Alt+L"
+# "name": "CopyRead"
 # "description": "Copy the selected text and paste it in the active window. Then press Alt+L to paste the text."
 
 ```powershell
